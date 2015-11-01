@@ -1,0 +1,5 @@
+/opt/openfoam231/src/OpenFOAM/lnInclude/
+/opt/openfoam231/src/turbulenceModels/incompressible/turbulenceModel/lnInclude/
+/opt/openfoam231/src/transportModels/lnInclude/
+/opt/openfoam231/src/transportModels/incompressible/singlePhaseTransportModel/lnInclude/
+/opt/openfoam231/src/finiteVolume/lnInclude/
