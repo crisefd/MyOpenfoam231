@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
     //Accessing the Mass dimension
     int mass = dimensions.MASS;
     //cout << "Mass dimension of DimensionedInternalField "<< mas << endl;
-*/
+
     //****Accessing the fvMesh object
     label inletI = mesh.boundaryMesh().findPatchID("inlet");
     scalar magInlet_1 = 0.0;
@@ -70,5 +70,16 @@ int main(int argc, char *argv[])
         magInlet_1 = mag(fvp_2[0]);
     }
     Foam::Info << "mangInlet_1:" << magInlet_1 << " magInlet_2:" << magInlet_2 << Foam::endl;
-   return 0;
+
+    tensor t1(1, 2, 3, 4, 5, 6, 7, 8, 9);
+    vector v1(-5, 5, 6);
+    Foam::Info<<"v1.x():" << v1.x() <<" v1.component(x):"<<v1.component(vector::X)<< Foam::endl;
+    Foam::Info<<"t1.xx():" << t1.xx() <<" t1.component(x):"<<t1.component(tensor::XX)<< Foam::endl;
+    dimensionedScalar dim_scalar(
+                "dim_scalar",
+                dimensionSet(0, 1, -1, 0, 0),
+                t1.xx()
+                );
+    */
+    return 0;
 }
