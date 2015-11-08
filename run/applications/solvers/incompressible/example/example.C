@@ -14,14 +14,39 @@ int main(int argc, char *argv[])
    #include "createFields.H"
    #include "createFvOptions.H"
    #include "initContinuityErrs.H"
-/*
+
 ///////Tensor operations for GeometricFields///////
     // Magnitude of velocity field U
-   volScalarField magU("magU", mag(U));
-   //Magnitude square of velocity field U
-   volScalarField magSqrU("magSqr", magSqr(U));
-///////////////////////////////////////////////
+   //volScalarField magU("magU", mag(U));
 
+   //Magnitude square of velocity field U
+   //volScalarField magSqrU("magSqr", magSqr(U));
+
+    //Square of U
+    //volSymmTensorField sqrU("sqrU", sqr(U));
+
+    // U outer product U
+    //volTensorField UbyU("U*U", U * U);
+
+    // U inner product U
+    //volScalarField UpntU("UpointU", U & U);
+
+    //tr() Trace only works for spherical tensors
+
+    //Min of U
+    //dimensionedVector minU = min(U);
+
+    //Max of U
+    //dimensionedVector maxU = max(U);
+
+     //Only works in Tensor Fields ?
+    //tmp<volVectorField> TransposeU("TransposeU", U.T());
+
+    //hodge dual of U
+    //volTensorField hodgeDualU("hodgeDualU", *U);
+
+///////////////////////////////////////////////
+/*
 //////Accessing the data in GeometricFields///////////////////
    label i = 0;
 //****Accessing the GeometricBoundaryField object of volField<Type> U (velocity field)
@@ -80,6 +105,44 @@ int main(int argc, char *argv[])
                 dimensionSet(0, 1, -1, 0, 0),
                 t1.xx()
                 );
-    */
+
+
+
+        simpleControl simple(mesh);
+
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+        Info<< "\nStarting time loop\n" << endl;
+
+        while (simple.loop())
+        {
+            Info<< "Time = " << runTime.timeName() << nl << endl;
+
+            // --- Pressure-velocity SIMPLE corrector
+            {
+                #include "UEqn.H"
+                #include "pEqn.H"
+            }
+
+            turbulence->correct();
+            volScalarField UpntU(IOobject
+                                 (
+                                     "UpointU",
+                                     runTime.timeName(),
+                                     mesh,
+                                     IOobject::NO_READ,
+                                     IOobject::AUTO_WRITE
+                                 ),
+                                 U & U);
+            runTime.write();
+
+
+            Info<< "ExecutionTime = " << runTime.elapsedCpuTime() << " s"
+                << "  ClockTime = " << runTime.elapsedClockTime() << " s"
+                << nl << endl;
+        }
+
+        Info<< "End\n" << endl;
+*/
     return 0;
 }
