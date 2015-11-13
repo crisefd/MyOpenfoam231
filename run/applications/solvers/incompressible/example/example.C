@@ -47,11 +47,28 @@ int main(int argc, char *argv[])
     #include "initContinuityErrs.H"
 
     ///////Tensor operations for GeometricFields///////
+    
+    // U plus U
+    //volVectorField UplusU("UplusU", U + U);
+    
+    //U minius U
+    
+    //volVectorField UminusU("UminusU", U - U);
+    
+    // U by p
+    //volVectorField UbyP("UbyP", U * p);
+    
+    //U divide p
+    //volVectorField UdividedP("UdividedP", U / p);
+    
         // Magnitude of velocity field U
        //volScalarField magU("magU", mag(U));
 
        //Magnitude square of velocity field U
        //volScalarField magSqrU("magSqr", magSqr(U));
+       
+       // p power 3
+       //volScalarField powP("powP", pow(p, 3));
 
         //Square of U
         //volSymmTensorField sqrU("sqrU", sqr(U));
@@ -60,18 +77,24 @@ int main(int argc, char *argv[])
         //volTensorField UbyU("U*U", U * U);
 
         // U inner product U
-        //volScalarField UpntU("UpointU", U & U);
+        //volScalarField UdotU("UdotU", U & U);
+        
+        // U double inner product U
+        //volScalarField UdotdotU("UdotdotU", U && U);
+        
+        // U cross product U
+        //volVectorField UcrossU("UcrossU", U ^ U);
 
         //tr() Trace only works for spherical tensors
 
         //Min of U
-        //dimensionedVector minU = min(U);
+        //dimensionedVector minU("minU", min(U));
 
         //Max of U
-        //dimensionedVector maxU = max(U);
+        //dimensionedVector maxU("maxU", max(U));
 
-         //Only works in Tensor Fields ?
-        //tmp<volVectorField> TransposeU("TransposeU", U.T());
+         //Transpose of UbyU?
+        //volTensorField TransposeU("TransposeU", UbyU.T());
 
         //hodge dual of U
         //volTensorField hodgeDualU("hodgeDualU", *U);
