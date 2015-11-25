@@ -11,6 +11,7 @@
     UEqn().relax();
 
     fvOptions.constrain(UEqn());
+    fvc::grad(phi);
 
     solve(UEqn() == -fvc::grad(p));
 
