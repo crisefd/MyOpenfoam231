@@ -80,7 +80,7 @@ int main(int argc, char *argv[])
         //volScalarField UdotU("UdotU", U & U);
         
         // U double inner product U
-        volScalarField UdotdotU("UdotdotU", UbyU && UbyU);
+        //volScalarField UdotdotU("UdotdotU", UbyU && UbyU);
         
         // U cross product U
         //volVectorField UcrossU("UcrossU", U ^ U);
@@ -184,47 +184,72 @@ int main(int argc, char *argv[])
             }
             Info<< "End\n" << endl;
 
-   volVectorField Utimes = 10*U;
-   Info << Utimes.internalField()[90].x() << nl << endl;
-
-   volScalarField kinetic("kinetic",0.5*magSqr(U));
-
-   volScalarField kinetic2("kinetic2",0.5*pow(mag(U),2));
-
-   volVectorField gradP("gradP",fvc::grad(p));
-
-   volVectorField UcrossU("UcrossU",U ^ U);
-
-   volScalarField psquare("psquare",sqr(p));
-
-   volScalarField UdotU("UdotU",U & U);
-
-   volTensorField UbyU("U*U", U * U);
-
-   UbyU.internalField()[80] = tensor(1,2,3,4,5,6,7,8,9);
-
-
-
-   volTensorField TransposeUbyU("TransposeUbyU", UbyU.T());
-
-   tensor TransposeUbyU80(UbyU.internalField()[80].T());
-
-   Foam::Info<< "U.internalField()[80]:" << U.internalField()[80] << Foam::endl;
-
-   Foam::Info<< "UbyU.internalField()[80]:" << UbyU.internalField()[80] << Foam::endl;
-
-   UbyU.internalField()[80] = UbyU.internalField()[80].T();
-
-   Foam::Info<< "TransposeUbyU()[80]" << UbyU.internalField()[80] << Foam::endl;
-
-   Foam::Info<< "UbyU.internalField()[80].xx():" << UbyU.internalField()[80].xx() << Foam::endl;
-
-   Foam::Info<< "UbyU.internalField()[80].x():" << UbyU.internalField()[80].x() << Foam::endl;
-
-
-
-
-
 */
+   //gradient of scalar field p
+   //vectorField gradP = fvc::grad(p);
+    //volVectorField gradPhi = fvc::grad(phi);
+
+   //sn gradient of scalar field p
+    //surfaceScalarField snGradP(fvc::snGrad(p));
+
+   //sn gradient of vector field U
+   //surfaceVectorField snGradU(fvc::snGrad(U));
+
+   //sn gradient of tensor field UbyU
+    //surfaceTensorField snGradUbyU(fvc::snGrad(UbyU));
+
+    //curl of U
+    //volVectorField curlU(fvc::curl(U));
+
+    //curl of p
+    //volScalarField curlP(fvc::curl(p));
+
+
+
+    //laplacian of scalar field p
+    //volScalarField lapP(fvc ::laplacian(p));
+     //volScalarField lapP_(fvc::laplacian(U, p));
+
+     // Time deriative for scalar field p, vector field U and tensor field UbyU
+      //volScalarField ddtP(fvc::ddt(p));
+      //volScalarField ddtP_(fvc::ddt(p, p));
+      //volVectorField ddtU(fvc::ddt(U));
+      //volVectorField ddtU_(fvc::ddt(p, U));
+      //volTensorField ddtUbyU(fvc::ddt(UbyU));
+      //volTensorField ddtUbyU_(fvc::ddt(p, UbyU));
+
+     //Second time derivative
+      //volScalarField d2dt2P(fvc::d2dt2(p));
+      //volScalarField d2dt2P_(fvc::d2dt2(p, p));
+      //volVectorField d2dt2U(fvc::d2dt2(U));
+      //volVectorField d2dt2U_(fvc::d2dt2(phi, U));
+      //volTensorField d2dt2UbyU(fvc::d2dt2(UbyU));
+      //volTensorField d2dt2UbyU_(fvc::d2dt2(p, UbyU));
+
+     //Conective term(?)
+      //volScalarField divP(fvc::div(phi, p));
+      //volVectorField divU(fvc::div(phi, U));
+
+      //volTensorField divUbyU(fvc::div(phi, UbyU));
+
+     // divergent (?)
+      //volScalarField divU_(fvc::div(U));
+      //volVectorField divUbyU_(fvc::div(UbyU));
+      //volScalarField divPhi(fvc::div(phi));
+
+
+     //Source
+      //volScalarField sourceP(fvc::Sp(2, p));
+      // volScalarField sourceP_(fvc::Sp(p, p));
+      //volVectorField sourceU(fvc::Sp(2, U));
+      //volVectorField sourceU_(fvc::Sp(p, U));
+       //volTensorField sourceUbyU(fvc::Sp(2, UbyU));
+      //volTensorField sourceUbyU(fvc::Sp(p, UbyU));
+
+      //volScalarField sourceP1(fvc::SuSp(p, p));
+     //volVectorField sourceU1(fvc::SuSp(p, U));
+      //volTensorField sourceUbyU1(fvc::SuSp(p, UbyU));
+
+
 return 0;
 }
