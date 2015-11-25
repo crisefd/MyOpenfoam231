@@ -74,13 +74,13 @@ int main(int argc, char *argv[])
         //volSymmTensorField sqrU("sqrU", sqr(U));
 
         // U outer product U
-        //volTensorField UbyU("U*U", U * U);
+        volTensorField UbyU("U*U", U * U);
 
         // U inner product U
         //volScalarField UdotU("UdotU", U & U);
         
         // U double inner product U
-        //volScalarField UdotdotU("UdotdotU", U && U);
+        volScalarField UdotdotU("UdotdotU", UbyU && UbyU);
         
         // U cross product U
         //volVectorField UcrossU("UcrossU", U ^ U);
@@ -226,5 +226,5 @@ int main(int argc, char *argv[])
 
 
 */
-return 0
+return 0;
 }
