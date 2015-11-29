@@ -100,10 +100,10 @@ int main(int argc, char *argv[])
         //volTensorField hodgeDualU("hodgeDualU", *U);
 
     ///////////////////////////////////////////////
-    /*
+
     //////Accessing the data in GeometricFields///////////////////
-       label i = 0;
-    //****Accessing the GeometricBoundaryField object of volField<Type> U (velocity field)
+       /*label i = 0;
+    //====Accessing the GeometricBoundaryField object of volField<Type> U (velocity field)
        volVectorField::GeometricBoundaryField boundaryFieldU(U.boundaryField());
        // Accessing the ith element fvPatchField<Type> of the boundary field of U
        const fvPatchVectorField & fvp = boundaryFieldU[i];
@@ -156,35 +156,9 @@ int main(int argc, char *argv[])
                     t1.xx()
                     );
 
-            simpleControl simple(mesh);
-            // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
-            Info<< "\nStarting time loop\n" << endl;
-            while (simple.loop())
-            {
-                Info<< "Time = " << runTime.timeName() << nl << endl;
-                // --- Pressure-velocity SIMPLE corrector
-                {
-                    #include "UEqn.H"
-                    #include "pEqn.H"
-                }
-                turbulence->correct();
-                volScalarField UpntU(IOobject
-                                     (
-                                         "UpointU",
-                                         runTime.timeName(),
-                                         mesh,
-                                         IOobject::MUST_READ,
-                                         IOobject::AUTO_WRITE
-                                     ),
-                                     U & U);
-                runTime.write();
-                Info<< "ExecutionTime = " << runTime.elapsedCpuTime() << " s"
-                    << "  ClockTime = " << runTime.elapsedClockTime() << " s"
-                    << nl << endl;
-            }
-            Info<< "End\n" << endl;
 
 */
+///Finite volume calculus
    //gradient of scalar field p
    //vectorField gradP = fvc::grad(p);
     //volVectorField gradPhi = fvc::grad(phi);
@@ -250,6 +224,82 @@ int main(int argc, char *argv[])
      //volVectorField sourceU1(fvc::SuSp(p, U));
       //volTensorField sourceUbyU1(fvc::SuSp(p, UbyU));
 
+///Finite volume method
+
+   //Time derivative of U
+   //tmp<fvVectorMatrix> fvDdtU(fvm::ddt(U));
+   //tmp<fvVectorMatrix> fvDdtU_(fvm::ddt(p, U));
+
+
+   //Second time derivative of U
+   //tmp<fvVectorMatrix> fvD2dt2U(fvm::d2dt2(U));
+    //tmp<fvVectorMatrix> fvD2dt2U_(fvm::d2dt2(p, U));
+
+   //Convective term(?) of phi and U
+   //tmp<fvVectorMatrix> fvDivU(fvm::div(phi, U));
+
+   //Laplacian
+   //tmp<fvVectorMatrix> fvLaplacianU(fvm::laplacian(U));
+   //Laplacian of p and U
+   //tmp<fvVectorMatrix> fvLaplacianPU(fvm::laplacian(p, U));
+   //Source of U
+   //tmp<fvVectorMatrix> fvSpU(fvm::Sp(4, U));
+   //tmp<fvVectorMatrix> fvSpU_(fvm::Sp(p, U));
+
+   //Source depending of the sign
+     //tmp<fvVectorMatrix> fvSuSpU_(fvm::SuSp(p, U));
+
+///Operadores adicionales para fvMatrix
+
+   //Sum with fvMatrix
+     //tmp<fvVectorMatrix> fvSumExample_1(fvDdtU + U);
+     //tmp<fvVectorMatrix> fvSumExample_2(fvDdtU + fvDdtU);
+
+    //Substraction with fvMatrix
+     //tmp<fvVectorMatrix> fvSubsExample_1(fvDdtU - U);
+     //tmp<fvVectorMatrix> fvSubsExample_2(fvDdtU - fvDdtU);
+
+   //Multiplication with fvMatrix
+   //tmp<fvVectorMatrix> fvMultExample_1(p * fvDdtU );
+
+///Methods for fvMatrix
+
+   //Matrix scalar diagonal
+   //scalarField diagonal = fvDdtU().D();
+   //Matrix scalar upper side
+   //scalarField upper = fvDdtU().upper();
+   //Matrix scalar lower side
+   //scalarField lower = fvDdtU().lower();
+   //GeometricField central coefficients
+   //volScalarField centralCoeff("AU",fvDdtU().A());
+   //Matrix type diagonal
+   //vectorField diagonal_ = fvDdtU().DD();
+   //H operation source
+   //volVectorField HoperationSource("HU",fvDdtU().H());
+   //Matrix residual
+   //vectorField residual = fvDdtU().residual();
+   //face-flux field from the matrix
+   //surfaceVectorField flux = fvDdtU().flux();
+
+////////////////simple solver //////////////////////////////////////////////////////////
+        simpleControl simple(mesh);
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+        Info<< "\nStarting time loop\n" << endl;
+        while (simple.loop())
+        {
+            Info<< "Time = " << runTime.timeName() << nl << endl;
+            // --- Pressure-velocity SIMPLE corrector
+            {
+                #include "UEqn.H"
+                #include "pEqn.H"
+            }
+            turbulence->correct();
+            runTime.write();
+            Info<< "ExecutionTime = " << runTime.elapsedCpuTime() << " s"
+                << "  ClockTime = " << runTime.elapsedClockTime() << " s"
+                << nl << endl;
+        }
+        Info<< "End\n" << endl;
 
 return 0;
 }
