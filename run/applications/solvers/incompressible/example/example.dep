@@ -689,6 +689,9 @@ example.dep: createFields.H
 example.dep: $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/createPhi.H
 example.dep: $(WM_PROJECT_DIR)/src/fvOptions/lnInclude/createFvOptions.H
 example.dep: $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/initContinuityErrs.H
+example.dep: UEqn.H
+example.dep: pEqn.H
+example.dep: $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/continuityErrs.H
 $(OBJECTS_DIR)/example.o: $(EXE_DEP)
 $(OBJECTS_DIR)/example.o:
 	@SOURCE_DIR=.

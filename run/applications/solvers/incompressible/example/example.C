@@ -118,7 +118,7 @@ int main(int argc, char *argv[])
                    dimensionSet(0, 1, -1, 0, 0),
                    vec1X
                    );
-    //****Accessing Internal Fields of volField<Type> object*******
+    //====Accessing Internal Fields of volField<Type> object=======
         //Accessing the Field<Type> of GeometricField<Type> U
         Field<vector>internalFieldU(U.internalField());
         label k = 0;
@@ -133,7 +133,7 @@ int main(int argc, char *argv[])
         //Accessing the Mass dimension
         int mass = dimensions.MASS;
         //cout << "Mass dimension of DimensionedInternalField "<< mas << endl;
-        //****Accessing the fvMesh object
+        //========Accessing the fvMesh object
         label inletI = mesh.boundaryMesh().findPatchID("inlet");
         scalar magInlet_1 = 0.0;
         scalar magInlet_2 = 0.0;
