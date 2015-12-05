@@ -74,7 +74,7 @@ int main(int argc, char *argv[])
         //volSymmTensorField sqrU("sqrU", sqr(U));
 
         // U outer product U
-        volTensorField UbyU("U*U", U * U);
+        //volTensorField UbyU("U*U", U * U);
 
         // U inner product U
         //volScalarField UdotU("UdotU", U & U);
@@ -102,62 +102,75 @@ int main(int argc, char *argv[])
     ///////////////////////////////////////////////
 
     //////Accessing the data in GeometricFields///////////////////
-       /*label i = 0;
+       //label i = 0;
     //====Accessing the GeometricBoundaryField object of volField<Type> U (velocity field)
-       volVectorField::GeometricBoundaryField boundaryFieldU(U.boundaryField());
+       //volVectorField::GeometricBoundaryField boundaryFieldU(U.boundaryField());
        // Accessing the ith element fvPatchField<Type> of the boundary field of U
-       const fvPatchVectorField & fvp = boundaryFieldU[i];
-       label j = 0;
+       //const fvPatchVectorField & fvp = boundaryFieldU[i];
+       //label j = 0;
        // Accessing the jth element Type of the patch field of U
-       Vector<double> vec1 = fvp[j];
+       //Vector<double> vec1 = fvp[j];
        //Accessing component x of vector
-       scalar vec1X = vec1.x();
+       //scalar vec1X = vec1.x();
        //creating a dimensioned<Type>  object from vector component
-       dimensionedScalar dimScalar(
-                   "dimScalar",
-                   dimensionSet(0, 1, -1, 0, 0),
-                   vec1X
-                   );
+       //dimensionedScalar dimScalar(
+         //          "dimScalar",
+           //        dimensionSet(0, 1, -1, 0, 0),
+             //      vec1X
+               //    );
     //====Accessing Internal Fields of volField<Type> object=======
         //Accessing the Field<Type> of GeometricField<Type> U
-        Field<vector>internalFieldU(U.internalField());
-        label k = 0;
+        //Field<vector>internalFieldU(U.internalField());
+        //label k = 0;
         //Accessing the kth element Vector<Type> object of the internal Field
-        Vector<double> vec2 = internalFieldU[k];
+        //Vector<double> vec2 = internalFieldU[k];
         //Accessing y component of vector
-        scalar vec2Y = vec2.y();
+        //scalar vec2Y = vec2.y();
         //Accessing the DimensionedInternalField<Type> object of GeometricField<Type> U
-        volVectorField::DimensionedInternalField dimInternalFieldU(U.dimensionedInternalField());
+        //volVectorField::DimensionedInternalField dimInternalFieldU(U.dimensionedInternalField());
         // Accessing dimensionSet object of the DimensionedInternalField object
-        dimensionSet dimensions(dimInternalFieldU.dimensions());
+        //dimensionSet dimensions(dimInternalFieldU.dimensions());
         //Accessing the Mass dimension
-        int mass = dimensions.MASS;
+        //int mass = dimensions.MASS;
         //cout << "Mass dimension of DimensionedInternalField "<< mas << endl;
         //========Accessing the fvMesh object
-        label inletI = mesh.boundaryMesh().findPatchID("inlet");
-        scalar magInlet_1 = 0.0;
-        scalar magInlet_2 = 0.0;
-        const fvPatchVectorField & fvp_1 = U.mesh().C().boundaryField()[inletI];
-        const fvPatchVectorField & fvp_2 = mesh.C().boundaryField()[inletI];
-        if(fvp_1.size()){
-            magInlet_1 = mag(fvp_1[0]);
-        }
-        if(fvp_2.size()){
-            magInlet_1 = mag(fvp_2[0]);
-        }
-        Foam::Info << "mangInlet_1:" << magInlet_1 << " magInlet_2:" << magInlet_2 << Foam::endl;
-        tensor t1(1, 2, 3, 4, 5, 6, 7, 8, 9);
-        vector v1(-5, 5, 6);
-        Foam::Info<<"v1.x():" << v1.x() <<" v1.component(x):"<<v1.component(vector::X)<< Foam::endl;
-        Foam::Info<<"t1.xx():" << t1.xx() <<" t1.component(x):"<<t1.component(tensor::XX)<< Foam::endl;
-        dimensionedScalar dim_scalar(
-                    "dim_scalar",
-                    dimensionSet(0, 1, -1, 0, 0),
-                    t1.xx()
-                    );
+        //label inletI = mesh.boundaryMesh().findPatchID("inlet");
+        //scalar magInlet_1 = 0.0;
+        //scalar magInlet_2 = 0.0;
+        //const fvPatchVectorField & fvp_1 = U.mesh().C().boundaryField()[inletI];
+        //const fvPatchVectorField & fvp_2 = mesh.C().boundaryField()[inletI];
+        //if(fvp_1.size()){
+          //  magInlet_1 = mag(fvp_1[0]);
+        //}
+        //if(fvp_2.size()){
+          //  magInlet_1 = mag(fvp_2[0]);
+        //}
+        //Foam::Info << "mangInlet_1:" << magInlet_1 << " magInlet_2:" << magInlet_2 << Foam::endl;
+        //tensor t1(1, 2, 3, 4, 5, 6, 7, 8, 9);
+        //vector v1(-5, 5, 6);
+        //Foam::Info<<"v1.x():" << v1.x() <<" v1.component(x):"<<v1.component(vector::X)<< Foam::endl;
+        //Foam::Info<<"t1.xx():" << t1.xx() <<" t1.component(x):"<<t1.component(tensor::XX)<< Foam::endl;
+        //dimensionedScalar dim_scalar(
+          //          "dim_scalar",
+            //        dimensionSet(0, 1, -1, 0, 0),
+              //      t1.xx()
+                //    );
+
+        //boundary Mesh
+        //const fvBoundaryMesh & boundaryMesh = mesh.boundary();
+       //cell face area vectors
+        //const surfaceVectorField &sf = mesh.Sf();
+       //cell face area magnitudes
+         //const surfaceScalarField& magSf = mesh.magSf();
+
+        //cell face motion fluxes
+         //const surfaceScalarField & meshPhi = mesh.phi();
+
+       //cell centers
+        const volVectorField & meshC = mesh.C();
+        const surfaceVectorField & meshCf = mesh.Cf();
 
 
-*/
 ///Finite volume calculus
    //gradient of scalar field p
    //vectorField gradP = fvc::grad(p);
@@ -262,6 +275,10 @@ int main(int argc, char *argv[])
    //Multiplication with fvMatrix
    //tmp<fvVectorMatrix> fvMultExample_1(p * fvDdtU );
 
+    //Equal operation
+    //fvVectorMatrix equalExample_1(fvDdtU == fvD2dt2U);
+    //fvVectorMatrix equalExample_2(fvDdtU == U);
+
 ///Methods for fvMatrix
 
    //Matrix scalar diagonal
@@ -271,19 +288,19 @@ int main(int argc, char *argv[])
    //Matrix scalar lower side
    //scalarField lower = fvDdtU().lower();
    //GeometricField central coefficients
-   //volScalarField centralCoeff("AU",fvDdtU().A());
+   //volScalarField centralCoeff(fvDdtU().A());
    //Matrix type diagonal
    //vectorField diagonal_ = fvDdtU().DD();
    //H operation source
-   //volVectorField HoperationSource("HU",fvDdtU().H());
+   //volVectorField HoperationSource(fvDdtU().H());
    //Matrix residual
    //vectorField residual = fvDdtU().residual();
    //face-flux field from the matrix
    //surfaceVectorField flux = fvDdtU().flux();
 
 ////////////////simple solver //////////////////////////////////////////////////////////
+/*
         simpleControl simple(mesh);
-        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
         Info<< "\nStarting time loop\n" << endl;
         while (simple.loop())
         {
@@ -300,6 +317,10 @@ int main(int argc, char *argv[])
                 << nl << endl;
         }
         Info<< "End\n" << endl;
+
+*/
+
+
 
 return 0;
 }
