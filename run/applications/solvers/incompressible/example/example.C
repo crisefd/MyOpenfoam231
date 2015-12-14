@@ -74,7 +74,7 @@ int main(int argc, char *argv[])
         //volSymmTensorField sqrU("sqrU", sqr(U));
 
         // U outer product U
-        //volTensorField UbyU("U*U", U * U);
+        volTensorField UbyU("U*U", U * U);
 
         // U inner product U
         //volScalarField UdotU("UdotU", U & U);
@@ -167,8 +167,8 @@ int main(int argc, char *argv[])
          //const surfaceScalarField & meshPhi = mesh.phi();
 
        //cell centers
-        const volVectorField & meshC = mesh.C();
-        const surfaceVectorField & meshCf = mesh.Cf();
+        //const volVectorField & meshC = mesh.C();
+        //const surfaceVectorField & meshCf = mesh.Cf();
 
 
 ///Finite volume calculus
@@ -188,8 +188,8 @@ int main(int argc, char *argv[])
     //curl of U
     //volVectorField curlU(fvc::curl(U));
 
-    //curl of p
-    //volScalarField curlP(fvc::curl(p));
+
+
 
 
 
@@ -240,13 +240,13 @@ int main(int argc, char *argv[])
 ///Finite volume method
 
    //Time derivative of U
-   //tmp<fvVectorMatrix> fvDdtU(fvm::ddt(U));
-   //tmp<fvVectorMatrix> fvDdtU_(fvm::ddt(p, U));
+   tmp<fvVectorMatrix> fvDdtU(fvm::ddt(U));
+   tmp<fvVectorMatrix> fvDdtU_(fvm::ddt(p, U));
 
 
    //Second time derivative of U
    //tmp<fvVectorMatrix> fvD2dt2U(fvm::d2dt2(U));
-    //tmp<fvVectorMatrix> fvD2dt2U_(fvm::d2dt2(p, U));
+   //tmp<fvVectorMatrix> fvD2dt2U_(fvm::d2dt2(p, U));
 
    //Convective term(?) of phi and U
    //tmp<fvVectorMatrix> fvDivU(fvm::div(phi, U));
@@ -260,23 +260,23 @@ int main(int argc, char *argv[])
    //tmp<fvVectorMatrix> fvSpU_(fvm::Sp(p, U));
 
    //Source depending of the sign
-     //tmp<fvVectorMatrix> fvSuSpU_(fvm::SuSp(p, U));
+    //tmp<fvVectorMatrix> fvSuSpU_(fvm::SuSp(p, U));
 
 ///Operadores adicionales para fvMatrix
 
    //Sum with fvMatrix
-     //tmp<fvVectorMatrix> fvSumExample_1(fvDdtU + U);
-     //tmp<fvVectorMatrix> fvSumExample_2(fvDdtU + fvDdtU);
+     //--fvVectorMatrix fvSumExample_1(fvDdtU() + U);
+     //fvVectorMatrix fvSumExample_2(fvDdtU() + fvDdtU());
 
     //Substraction with fvMatrix
-     //tmp<fvVectorMatrix> fvSubsExample_1(fvDdtU - U);
-     //tmp<fvVectorMatrix> fvSubsExample_2(fvDdtU - fvDdtU);
+     //--fvVectorMatrix fvSubsExample_1(fvDdtU() - U);
+     //fvVectorMatrix fvSubsExample_2(fvDdtU() - fvDdtU());
 
    //Multiplication with fvMatrix
-   //tmp<fvVectorMatrix> fvMultExample_1(p * fvDdtU );
+   //tmp<fvVectorMatrix> fvMultExample_1(p * fvDdtU() );
 
     //Equal operation
-    //fvVectorMatrix equalExample_1(fvDdtU == fvD2dt2U);
+    //--fvVectorMatrix equalExample_1(fvDdtU() == fvDdtU_());
     //fvVectorMatrix equalExample_2(fvDdtU == U);
 
 ///Methods for fvMatrix
