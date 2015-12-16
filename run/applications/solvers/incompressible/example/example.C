@@ -74,7 +74,7 @@ int main(int argc, char *argv[])
         //volSymmTensorField sqrU("sqrU", sqr(U));
 
         // U outer product U
-        volTensorField UbyU("U*U", U * U);
+        //volTensorField UbyU("U*U", U * U);
 
         // U inner product U
         //volScalarField UdotU("UdotU", U & U);
@@ -213,7 +213,12 @@ int main(int argc, char *argv[])
       //volTensorField d2dt2UbyU(fvc::d2dt2(UbyU));
       //volTensorField d2dt2UbyU_(fvc::d2dt2(p, UbyU));
 
-     //Conective term(?)
+     //Convective term(?)
+        surfaceScalarField interP(linearInterpolate(p));
+        volScalarField divP2(fvc::div(interP, p));
+        Info<<p.internalField()<<endl;
+        Info<<mesh.cellCells()<<endl;
+
       //volScalarField divP(fvc::div(phi, p));
       //volVectorField divU(fvc::div(phi, U));
 
