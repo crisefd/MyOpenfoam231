@@ -214,10 +214,21 @@ int main(int argc, char *argv[])
       //volTensorField d2dt2UbyU_(fvc::d2dt2(p, UbyU));
 
      //Convective term(?)
+        //Info<<mesh.cellCells()<<endl;
+        List<int> x = mesh.cellCells()[3];
+        Info<<x<<endl;
         surfaceScalarField interP(linearInterpolate(p));
         volScalarField divP2(fvc::div(interP, p));
-        Info<<p.internalField()<<endl;
-        Info<<mesh.cellCells()<<endl;
+        Info<<p.internalField()[0]<<endl;
+        Info<<p.internalField()[2]<<endl;
+        Info<<p.internalField()[4]<<endl;
+         Info<<p.internalField()[13]<<endl;
+        Info<<"================="<<endl;
+        Info<<divP2.internalField()[0]<<endl;
+        Info<<divP2.internalField()[2]<<endl;
+        Info<<divP2.internalField()[4]<<endl;
+        Info<<divP2.internalField()[13]<<endl;
+
 
       //volScalarField divP(fvc::div(phi, p));
       //volVectorField divU(fvc::div(phi, U));
